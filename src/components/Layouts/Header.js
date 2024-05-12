@@ -15,12 +15,12 @@ export const Header = () => {
 
     useEffect(() => {
         localStorage.setItem("darkMode", JSON.stringify(darkMode));
-        if (darkMode) {
-            document.documentElement.classList.add("dark")
-        } else {
-            document.documentElement.classList.remove("dark")
-        }
+        document.documentElement.classList.toggle("dark", darkMode)
     }, [darkMode])
+
+    const handleToggleDarkMode = () => {
+        setDarkMode(prevMode => !prevMode)
+    }
 
     return (
         <header>
@@ -31,7 +31,7 @@ export const Header = () => {
                         <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">CodeBook</span>
                     </Link>
                     <div className="flex items-center relative">
-                        <span onClick={() => setDarkMode(!darkMode)} className="cursor-pointer text-xl text-gray-700 dark:text-white mr-5 bi bi-gear-wide-connected"></span>
+                        <span onClick={handleToggleDarkMode} className="cursor-pointer text-xl text-gray-700 dark:text-white mr-5 bi bi-gear-wide-connected"></span>
                         <span onClick={() => setSearchSection(!searchSection)} className="cursor-pointer text-xl text-gray-700 dark:text-white mr-5 bi bi-search"></span>
                         <Link to="/cart" className="text-gray-700 dark:text-white mr-5">
                             <span className="text-2xl bi bi-cart-fill relative">

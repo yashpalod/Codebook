@@ -9,11 +9,6 @@ export const ProductCard = ({ product }) => {
     const [inCart, setInCart] = useState(false);
     const { id, name, overview, rating, price, poster, best_seller } = product;
 
-    // function handleClick(product) {
-    //     addToCart(product)
-    //     removeFromCart(product)
-    // }
-
     useEffect(() => {
         const productInCart = cartList.find(item => item.id === product.id)
 
@@ -38,11 +33,6 @@ export const ProductCard = ({ product }) => {
 
                 <div className="flex items-center my-2">
                     <Rating rating={rating} />
-                    {/* <i className="text-lg by bi-star-fill text-yellow-500 mr-1"></i>
-                    <i className="text-lg by bi-star-fill text-yellow-500 mr-1"></i>
-                    <i className="text-lg by bi-star-fill text-yellow-500 mr-1"></i>
-                    <i className="text-lg by bi-star-fill text-yellow-500 mr-1"></i>
-                    <i className="text-lg by bi-star text-yellow-500 mr-1"></i> */}
                 </div>
 
                 <p className="flex justify-between items-center">

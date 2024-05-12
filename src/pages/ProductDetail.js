@@ -11,6 +11,7 @@ export const ProductDetail = () => {
     const { cartList, addToCart, removeFromCart } = useCart();
     const [inCart, setInCart] = useState(false);
     const [product, setProduct] = useState({});
+    const [loading, setLoading] = useState(true)
     const { id } = useParams();
     useTitle(product.name);
 
@@ -21,8 +22,9 @@ export const ProductDetail = () => {
                 setProduct(data)
             } catch (error) {
                 toast.error(error.message, { closeButton: true, position: "bottom-center" })
+            } finally {
+                setLoading(false)
             }
-
         }
         fetchProducts();
     }, [id])
@@ -36,6 +38,10 @@ export const ProductDetail = () => {
             setInCart(false)
         }
     }, [cartList, product.id])
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
 
     return (
         <main>

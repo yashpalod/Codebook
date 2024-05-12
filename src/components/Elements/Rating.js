@@ -1,8 +1,10 @@
+import { useMemo } from "react";
+
 export const Rating = ({ rating }) => {
-    let ratingArray = Array(5).fill(false)
-    for (let i = 0; i < rating; i++) {
-        ratingArray[i] = true;
-    }
+    let ratingArray = useMemo(() => {
+        const filledStarsCount = Math.min(5, Math.max(0, rating))
+        return Array.from({ length: 5 }, (_, index) => index < filledStarsCount)
+    }, [rating])
 
     return (
         <>

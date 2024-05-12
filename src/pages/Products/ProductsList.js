@@ -10,26 +10,29 @@ import { toast } from "react-toastify";
 export const ProductsList = () => {
     const { products, initialProductList } = useFilter();
     const [show, setShow] = useState(false);
-    // const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const search = useLocation().search;
     const searchTerm = new URLSearchParams(search).get("q");
-    //console.log(searchTerm)
+
     useTitle("Explore Our Collection");
-    //console.log(productList)
 
     useEffect(() => {
         async function fetchProducts() {
             try {
                 const data = await getProductList(searchTerm)
-                // setProducts(data)
                 initialProductList(data);
             } catch (error) {
                 toast.error(error.message, { closeButton: true, position: "bottom-center" })
+            } finally {
+                setLoading(false)
             }
-
         }
         fetchProducts();
     }, [searchTerm]);
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
 
     return (
         <main>
